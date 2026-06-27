@@ -1,0 +1,24 @@
+Created At: 2026-06-20T08:04:07Z
+Completed At: 2026-06-20T08:04:08Z
+File Path: `file:///c:/Users/prana/Downloads/StartUp_HUB/server/src/routes/profileRoutes.js`
+Total Lines: 16
+Total Bytes: 447
+Showing lines 1 to 16
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: const express = require('express');
+2: const profileController = require('../controllers/profileController');
+3: const { protect } = require('../middleware/authMiddleware');
+4: 
+5: const router = express.Router();
+6: 
+7: // Get public profile
+8: router.get('/:userId', profileController.getProfile);
+9: 
+10: // Protected profile actions
+11: router.use(protect);
+12: router.get('/me', profileController.getMe);
+13: router.put('/me', profileController.updateMe);
+14: 
+15: module.exports = router;
+16: 
+The above content shows the entire, complete file contents of the requested file.

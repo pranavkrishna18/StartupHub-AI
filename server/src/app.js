@@ -23,13 +23,36 @@ const investorRouter = require('./routes/investorRoutes');
 const adminRouter = require('./routes/adminRoutes');
 const reportRouter = require('./routes/reportRoutes');
 const notificationRouter = require('./routes/notificationRoutes');
+const jobRouter = require('./routes/jobRoutes');
+const resumeRouter = require('./routes/resumeRoutes');
+const workspaceRouter = require('./routes/workspaceRoutes');
+const fundraisingRouter = require('./routes/fundraisingRoutes');
 
 const app = express();
+
+
+
+
 
 // 1. GLOBAL MIDDLEWARES
 
 // Set security HTTP headers
-app.use(helmet());
+const frameAncestors = ["'self'", "http://localhost:5173"];
+if (process.env.FRONTEND_URL) {
+  frameAncestors.push(process.env.FRONTEND_URL);
+}
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "frame-ancestors": frameAncestors,
+      },
+    },
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    xFrameOptions: false
+  })
+);
 
 // Logging in development
 if (process.env.NODE_ENV === 'development') {
@@ -51,13 +74,17 @@ app.use(cors({
 }));
 
 // Body parser, reading data from body into req.body
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '5mb' }));
 
 // Cookie parser, reading cookies from headers
 app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
+
+// Serve uploads folder statically
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // 2. MOUNT ROUTES
 app.use('/api/v1/auth', authRouter);
@@ -73,6 +100,14 @@ app.use('/api/v1/investor', investorRouter);
 app.use('/api/v1/admin', adminRouter);
 app.use('/api/v1/reports', reportRouter);
 app.use('/api/v1/notifications', notificationRouter);
+app.use('/api/v1/jobs', jobRouter);
+app.use('/api/v1/resumes', resumeRouter);
+app.use('/api/v1/workspace', workspaceRouter);
+app.use('/api/v1/fundraising', fundraisingRouter);
+
+
+
+
 
 // 3. UNHANDLED ROUTES ROUTER
 app.all('*', (req, res, next) => {

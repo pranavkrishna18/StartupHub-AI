@@ -22,7 +22,9 @@ const notificationSchema = new mongoose.Schema({
         'apply_cofounder',
         'accept_application',
         'reject_application',
+        'application_stage_update',
         'chat_message',
+
         'announcement'
       ],
       message: 'Invalid notification type'

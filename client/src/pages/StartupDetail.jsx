@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
-import { ChevronUp, Globe, CornerDownRight, MessageSquare, Plus, Check, Send, AlertCircle, ArrowLeft, BrainCircuit, Briefcase, CheckCircle2, BookMarked, UserPlus, UserCheck, ShieldAlert, ExternalLink } from 'lucide-react';
+import { ChevronUp, Globe, CornerDownRight, MessageSquare, Plus, Check, Send, AlertCircle, ArrowLeft, BrainCircuit, Briefcase, CheckCircle2, BookMarked, UserPlus, UserCheck, ShieldAlert, ExternalLink, Landmark } from 'lucide-react';
+
 import API from '../services/api';
 import ReportModal from '../components/ReportModal';
 
@@ -253,12 +254,12 @@ const StartupDetail = () => {
       </Link>
 
       {/* HEADER SECTION */}
-      <div className="glass-card p-6 md:p-8 flex flex-col md:flex-row items-center md:items-start justify-between gap-6 mb-8">
+      <div className="glass-card p-6 md:p-8 flex flex-col gap-6 mb-8">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-5">
           <div className="h-20 w-20 bg-gradient-to-tr from-violet-600/30 to-cyan-500/30 border border-white/10 flex items-center justify-center text-white text-3xl font-extrabold rounded-3xl shrink-0 shadow-lg">
             {startup.name[0]}
           </div>
-          <div className="space-y-2 text-center md:text-left">
+          <div className="space-y-2 text-center md:text-left flex-1 min-w-0">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <h1 className="text-3xl font-extrabold text-white margin-0 m-0 leading-tight">{startup.name}</h1>
               {startup.status === 'verified' && (
@@ -268,7 +269,7 @@ const StartupDetail = () => {
                 {startup.category?.name}
               </span>
             </div>
-            <p className="text-slate-300 text-lg">{startup.tagline}</p>
+            <p className="text-slate-300 text-lg leading-snug">{startup.tagline}</p>
             {startup.website && (
               <a
                 href={startup.website}
@@ -284,7 +285,10 @@ const StartupDetail = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
+        {/* Action Separator Divider */}
+        <div className="border-t border-white/5 pt-2"></div>
+
+        <div className="flex flex-wrap items-center gap-3 w-full justify-center md:justify-start">
           {/* Apply to Startup button */}
           {isAuthenticated && user?._id !== startup.founder?._id && !isTeamMember && (
             <button
@@ -296,8 +300,32 @@ const StartupDetail = () => {
             </button>
           )}
 
+          {/* Go to Team Workspace button */}
+          {isAuthenticated && (user?._id === startup.founder?._id || isTeamMember) && (
+            <Link
+              to={`/workspace/${startup._id}`}
+              className="flex items-center gap-2 px-5 py-4 bg-brand-cyan/15 hover:bg-brand-cyan/20 border border-brand-cyan/35 text-brand-cyan hover:text-white rounded-2xl transition-all font-black text-sm shadow-[0_0_15px_rgba(0,242,254,0.1)]"
+            >
+              <Briefcase className="h-4 w-4 text-brand-cyan" />
+              Team Workspace
+            </Link>
+          )}
+
+          {/* Raising Portal Button */}
+          {isAuthenticated && (
+            <Link
+              to={`/fundraising/${startup._id}`}
+              className="flex items-center gap-2 px-5 py-4 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:text-white rounded-2xl transition-all font-bold text-sm shadow-[0_0_15px_rgba(16,185,129,0.08)]"
+            >
+              <Landmark className="h-4 w-4 text-emerald-400" />
+              Raise Campaign
+            </Link>
+          )}
+
           {/* AI Insights Button */}
           <Link
+
+
             to={`/startup/${startup._id}/ai-insights`}
             className="flex items-center gap-2 px-5 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white rounded-2xl transition-all font-bold text-sm"
           >

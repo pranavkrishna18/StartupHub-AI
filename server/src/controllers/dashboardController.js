@@ -51,10 +51,11 @@ exports.getFounderDashboardStats = async (req, res, next) => {
       .sort({ createdAt: -1 })
       .limit(10);
 
-    // 4. Get pending applications for founder's startups
-    const pendingApps = await Application.find({ startup: { $in: startupIds }, status: 'pending' })
+    // 4. Get all applications for founder's startups
+    const pendingApps = await Application.find({ startup: { $in: startupIds } })
       .populate('startup', 'name')
       .populate('user', 'email')
+      .populate('jobOpening', 'title hiringStages')
       .sort({ createdAt: -1 });
 
     const appUserIds = pendingApps.map(app => app.user._id);
@@ -69,10 +70,12 @@ exports.getFounderDashboardStats = async (req, res, next) => {
         email: app.user.email,
         fullName: profile?.fullName || 'Anonymous Candidate',
         headline: profile?.headline || '',
-        skills: profile?.skills || []
+        skills: profile?.skills || [],
+        avatar: profile?.avatar || ''
       };
       return doc;
     });
+
 
     res.status(200).json({
       status: 'success',

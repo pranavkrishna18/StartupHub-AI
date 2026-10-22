@@ -101,27 +101,29 @@ const Signup = () => {
           {/* Role selector */}
           <div className="space-y-1">
             <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider block">Choose Role</label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="flex flex-col gap-2.5">
               {[
-                { value: 'cofounder', label: 'Co-founder' },
-                { value: 'founder', label: 'Founder' },
-                { value: 'investor', label: 'Investor' }
+                { value: 'cofounder', label: 'Join a Team (Talent / Co-founder)', desc: 'Search for opportunities, analyze your resume, and get matched.' },
+                { value: 'founder', label: 'Start a Venture (Founder)', desc: 'Submit concepts, post job openings, and build your team.' },
+                { value: 'investor', label: 'Invest Capital (Investor)', desc: 'Explore campaigns, sign NDAs, and generate term sheets.' }
               ].map((item) => (
                 <button
                   key={item.value}
                   type="button"
                   onClick={() => setRole(item.value)}
-                  className={`py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all duration-200 ${
+                  className={`p-4 rounded-2xl border text-left transition-all duration-200 ${
                     role === item.value
-                      ? 'bg-brand-violet/20 border-brand-violet text-brand-cyan shadow-[0_0_15px_rgba(124,58,237,0.2)]'
+                      ? 'bg-brand-violet/20 border-brand-violet text-brand-cyan shadow-[0_0_15px_rgba(124,58,237,0.15)] scale-[1.01]'
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10'
                   }`}
                 >
-                  {item.label}
+                  <div className={`font-bold text-xs ${role === item.value ? 'text-brand-cyan' : 'text-slate-200'}`}>{item.label}</div>
+                  <div className="text-[10px] text-slate-400 mt-1 leading-normal">{item.desc}</div>
                 </button>
               ))}
             </div>
           </div>
+
 
           {/* Submit */}
           <button

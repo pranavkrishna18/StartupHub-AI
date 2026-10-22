@@ -21,8 +21,17 @@ import AdminDashboard from './pages/AdminDashboard';
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
 import Notifications from './pages/Notifications';
+import JobCatalog from './pages/JobCatalog';
+import ResumeAnalyzer from './pages/ResumeAnalyzer';
+import Workspace from './pages/Workspace';
+import FundraisingPortal from './pages/FundraisingPortal';
+import FundraisingDashboard from './pages/FundraisingDashboard';
+
+
 
 function App() {
+
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-[#06050c] text-slate-100 font-sans antialiased">
@@ -34,6 +43,8 @@ function App() {
           <Routes>
             {/* Public Explorer Feed */}
             <Route path="/" element={<Feed />} />
+            <Route path="/jobs" element={<JobCatalog />} />
+
 
             {/* Auth Pages */}
             <Route path="/login" element={<Login />} />
@@ -77,6 +88,41 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/resume-analyzer"
+              element={
+                <ProtectedRoute>
+                  <ResumeAnalyzer />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/workspace/:startupId"
+              element={
+                <ProtectedRoute>
+                  <Workspace />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/fundraising/:startupId"
+              element={
+                <ProtectedRoute>
+                  <FundraisingPortal />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/fundraising-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['founder', 'admin']}>
+                  <FundraisingDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+
+
             {/* Protected Onboarding Profile */}
             <Route
               path="/onboarding"

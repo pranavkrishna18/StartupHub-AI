@@ -382,6 +382,22 @@ exports.sendApplicationRejectedEmail = async (to, name, startupName) => {
   return sendEmail({ to, subject: `Application update for ${startupName} 📋`, html });
 };
 
+exports.sendApplicationStageUpdateEmail = async (to, name, startupName, role, stage) => {
+  const content = `
+    <h1>Application Pipeline Update 📋</h1>
+    <p>Hi ${name || 'there'},</p>
+    <p>We have a pipeline update regarding your application to join <strong>${startupName}</strong> for the role of <strong>${role}</strong>.</p>
+    <p>Your application status has been advanced to: <strong>${stage}</strong>.</p>
+    <p>Check your candidate dashboard or chat workspace to stay updated on next steps.</p>
+    <div class="btn-container">
+      <a href="${frontendUrl}/dashboard" class="btn">View My Dashboard</a>
+    </div>
+  `;
+  const html = getSharedHtmlLayout('Application Stage Update', content);
+  return sendEmail({ to, subject: `Application update for ${startupName} 📋`, html });
+};
+
+
 /**
  * Send Offline Direct Messages Summary Email (Module 5 Batching)
  */

@@ -29,8 +29,12 @@ const messageSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Index to quickly fetch conversation history sorted by time
+// Indexes to quickly fetch conversation history sorted by time (in both directions)
 messageSchema.index({ sender: 1, receiver: 1, createdAt: 1 });
+messageSchema.index({ receiver: 1, sender: 1, createdAt: 1 });
+
+// Index for offline message notification crons
+messageSchema.index({ isRead: 1, emailSent: 1, createdAt: 1 });
 
 const Message = mongoose.model('Message', messageSchema);
 

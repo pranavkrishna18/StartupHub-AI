@@ -1,0 +1,572 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{top=1in, bottom=1in, left=1.25in, right=1in}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={StartupHub AI Project Report},
+    pdfpagemode=FullScreen,
+}
+
+\begin{document}
+
+% ==============================================================================
+% COVER PAGE
+% ==============================================================================
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        \Huge
+        \textbf{STARTUPHUB AI: AN AI-POWERED STARTUP VALIDATION AND COLLABORATION PLATFORM}
+        
+        \vspace{1.5cm}
+        
+        \large
+        \textit{A Project Report submitted in partial fulfillment of the requirements \\ for the award of the degree of}
+        
+        \vspace{0.8cm}
+        
+        \Large
+        \textbf{BACHELOR OF TECHNOLOGY} \\
+        \large
+        \textbf{in} \\
+        \Large
+        \textbf{COMPUTER SCIENCE AND ENGINEERING}
+        
+        \vspace{1.5cm}
+        
+        \large
+        \textbf{Submitted By:} \\
+        Pranav Krishna \\
+        Reg. No: [Registration Number]
+        
+        \vspace{1cm}
+        
+        \textbf{Under the Guidance of:} \\
+        [Project Guide Name / Designation]
+        
+        \vspace{1.5cm}
+        
+        \begin{figure}[h]
+            \centering
+            \setlength{\unitlength}{1mm}
+            \begin{picture}(40,40)
+                \put(0,0){\framebox(40,40){[LOGO]}}
+            \end{picture}
+        \end{figure}
+        
+        \vspace{1.5cm}
+        
+        \large
+        \textbf{DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING} \\
+        \textbf{[UNIVERSITY / COLLEGE NAME]} \\
+        \textbf{ACADEMIC YEAR: 2025 - 2026}
+        
+    \end{center}
+\end{titlepage}
+
+% ==============================================================================
+% CERTIFICATE PAGE
+% ==============================================================================
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \large
+    \textbf{DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING} \\
+    \textbf{[UNIVERSITY / COLLEGE NAME]} \\
+    \vspace{0.5cm}
+    \textbf{CERTIFICATE}
+\end{center}
+\vspace{1cm}
+This is to certify that the project report entitled \textbf{"STARTUPHUB AI: AN AI-POWERED STARTUP VALIDATION AND COLLABORATION PLATFORM"} is a bonafide work carried out by \textbf{Pranav Krishna} in partial fulfillment of the requirements for the award of the degree of \textbf{Bachelor of Technology in Computer Science and Engineering} during the academic year \textbf{2025 - 2026}.
+
+The project work has been monitored and evaluated under our supervision, and is recommended for submission towards the final university examinations.
+
+\vspace{3cm}
+
+\noindent
+\begin{tabular}{@{}p{3in}p{3in}@{}}
+    \textbf{Internal Project Guide} & \textbf{Head of the Department} \\
+    [Designation / Department] & Department of CSE
+\end{tabular}
+
+\vspace{2cm}
+\noindent
+Submitted for University Project Viva-Voce Examination held on: \hrulefill
+
+\vspace{2cm}
+\noindent
+\begin{tabular}{@{}p{3in}p{3in}@{}}
+    \textbf{Internal Examiner} & \textbf{External Examiner}
+\end{tabular}
+
+% ==============================================================================
+% DECLARATION PAGE
+% ==============================================================================
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \large
+    \textbf{DECLARATION}
+\end{center}
+\vspace{1.5cm}
+I hereby declare that the project report entitled \textbf{"STARTUPHUB AI: AN AI-POWERED STARTUP VALIDATION AND COLLABORATION PLATFORM"} submitted by me to the Department of Computer Science and Engineering at \textbf{[University / College Name]} in partial fulfillment of the requirements for the award of the degree of \textbf{Bachelor of Technology in Computer Science and Engineering} is a record of original project work carried out under the guidance of \textbf{[Project Guide Name]}.
+
+The results, configurations, and source code modules described in this report are original and have not been submitted to any other university or institute for the award of any other degree or diploma.
+
+\vspace{4cm}
+\noindent
+\begin{tabular}{@{}p{3.5in}p{2.5in}@{}}
+    \textbf{Date:} \hrulefill & \hrulefill \\
+    \textbf{Place:} \hrulefill & \textbf{Pranav Krishna} \\
+     & [Reg. No.]
+\end{tabular}
+
+% ==============================================================================
+% ACKNOWLEDGEMENT
+% ==============================================================================
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \large
+    \textbf{ACKNOWLEDGEMENT}
+\end{center}
+\vspace{1.5cm}
+First and foremost, I would like to express my gratitude to my project guide, \textbf{[Project Guide Name]}, for their constant encouragement, invaluable suggestions, and technical guidance throughout the course of this project work. Their mentorship has been a continuous source of inspiration during critical debugging phases and architectural designs.
+
+I would also like to thank the Head of the Department of Computer Science and Engineering, for providing access to the computational resources and infrastructure required to carry out this research and development work.
+
+I extend my appreciation to all the faculty members of the Department of Computer Science and Engineering who have directly or indirectly supported me in completing this work.
+
+Finally, I am deeply indebted to my parents and friends for their support, understanding, and feedback during the design, coding, and writing phases of this project.
+
+\vspace{3cm}
+\noindent
+\textbf{Pranav Krishna} \\
+B.Tech, Computer Science and Engineering \\
+[University/College Name]
+
+% ==============================================================================
+% ABSTRACT
+% ==============================================================================
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \large
+    \textbf{ABSTRACT}
+\end{center}
+\vspace{1cm}
+The \textbf{StartupHub AI} is an enterprise-grade MERN Stack web application that validates early-stage startup pitches, matches developers with co-founders based on skill requirements, enables real-time collaboration, and provides administrative governance. Traditional platforms are siloed and suffer from confirmation bias, verification deficits, and high search noise. StartupHub AI solves this by introducing a multi-key AI validation rotation gateway querying Gemini Flash models with an automatic failover to Groq Llama 3.3 models to compile SWOT matrices and Business canvases. It implements a skill compatibility index scoring algorithm, real-time message relays using Socket.IO, transactional email configurations via the Resend API, and strict administrative monitoring capturing audit metadata.
+
+This project report describes the implementation details of the application, including the Entity-Relationship (ER) model relationships, the Model-View-Controller (MVC) logic separation, schema designs, and setup configurations.
+
+\vspace{1cm}
+\noindent
+\textbf{Keywords:} StartupHub AI, MERN Stack, Socket.IO, Resend API, API Rotation, Co-founder Matching, Audit Trail, MVC Architecture.
+
+\newpage
+\tableofcontents
+
+% ==============================================================================
+% CHAPTER 1: INTRODUCTION
+% ==============================================================================
+\chapter{INTRODUCTION}
+\textbf{StartupHub AI} is an AI-powered startup validation and co-founder collaboration platform. It provides developers and founders with the metrics, validation indices, and matched partnerships necessary to launch products. By combining analytical validation models, compatibility scoring, real-time messages, and governance dashboards, StartupHub AI mitigates pre-incubation startup failures.
+
+\section{Scenario-Based Case Study}
+To illustrate the application workflow, we review the case of a founder, **Adithya**, who has an idea for a startup named \textit{AgriShield AI} (an AI-powered crop disease detection and farm advisory platform). 
+
+Adithya is unsure whether his idea will succeed. Instead of directly investing time and money, he uses **StartupHub AI**:
+\begin{itemize}
+    \item \textbf{User Registration}: Adithya registers, selects his role as "Founder", and lists his required skills (e.g. Python, AI, React).
+    \item \textbf{Idea Submission}: He enters details about AgriShield AI, categorizing it under "Agriculture".
+    \item \textbf{Validation Process}: The system submits the pitch to the AI Rotation Gateway, generating a validation score of 85\% with SWOT points.
+    \item \textbf{Feedback & Traction}: Other platform users upvote the concept and join the early-stage waitlist.
+    \item \textbf{Co-Founder Match}: The compatibility engine matches Adithya with a "Co-Founder Candidate", Tarun, who lists Python and Machine Learning skills.
+    \item \textbf{Real-Time Connection}: Adithya connects with Tarun, and they initiate a WebSocket chat session to discuss terms.
+\end{itemize}
+
+\subsection{Outcome}
+Adithya validates early interest, establishes waitlist traction, and builds a founding team, accelerating the pre-development cycle.
+
+% ==============================================================================
+% CHAPTER 2: SYSTEM REQUIREMENTS
+% ==============================================================================
+\chapter{SYSTEM REQUIREMENTS}
+
+\section{Software Requirements}
+The software configurations used to develop and deploy StartupHub AI include:
+\begin{itemize}
+    \item \textbf{Operating System}: Windows / Linux / macOS
+    \item \textbf{Frontend Library}: React.js (built using Vite and Tailwind CSS)
+    \item \textbf{Backend Server}: Node.js with Express.js
+    \item \textbf{Database Engine}: MongoDB (Mongoose ODM)
+    \item \textbf{Third-Party APIs}: Gemini Flash API, Groq Llama API, Resend Node SDK
+    \item \textbf{Development Tools}: VS Code, Postman API Client
+\end{itemize}
+
+\section{Hardware Requirements}
+The minimum hardware specifications required to deploy and run the system are:
+\begin{itemize}
+    \item \textbf{Processor}: Intel i5 or higher (or equivalent Apple Silicon / AMD processor)
+    \item \textbf{RAM}: Minimum 8GB
+    \item \textbf{Storage}: 1GB free space (excluding database files)
+    \item \textbf{Display Resolution}: 1366$\times$768 or higher
+\end{itemize}
+
+% ==============================================================================
+% CHAPTER 3: PROJECT ARCHITECTURE
+% ==============================================================================
+\chapter{PROJECT ARCHITECTURE}
+
+\section{Technical Architecture Analysis}
+The technical architecture of the system is designed using a layered, service-oriented approach. It illustrates how different components of the system interact with one another, beginning from the user interface and extending down to backend processing, external integrations, and data storage.
+
+\begin{enumerate}
+    \item \textbf{Web Application Layer (Vite Frontend)}: Renders the user interfaces and routes. It is divided into functional components, including:
+    \begin{itemize}
+        \item Feed & Discovery View (`Feed.jsx`, `Discovery.jsx`)
+        \item Onboarding Wizard (`Onboarding.jsx`)
+        \item Founder & Investor Analytics Dashboards (`Dashboard.jsx`, `InvestorDashboard.jsx`)
+        \item Real-Time Chat Window (`Chat.jsx`)
+        \item AI Insights Canvas (`AIReportView.jsx`)
+        \item Administrative Portal (`AdminDashboard.jsx`)
+    \end{itemize}
+    \item \textbf{API Gateway / Routing Layer}: Serves as a bridge between the frontend web app and backend micro-services. All incoming HTTPS requests are routed through this gateway to centralize request handling, validate JWT session cookies, and enforce security policies.
+    \item \textbf{Backend Services Layer}: Runs independent units that handle core business logic, including:
+    \begin{itemize}
+        \item `authController.js` and `userController.js`
+        \item `startupController.js` and `categoryController.js`
+        \item `aiController.js` and `aiService.js`
+        \item `matchController.js` and `matchService.js`
+        \item `adminController.js`, `emailService.js`, and `cronService.js`
+    \end{itemize}
+    \item \textbf{Third-Party Services Integration}: Extends application capabilities, including:
+    \begin{itemize}
+        \item Email Service (Resend API)
+        \item LLM Services (Gemini API with Groq Fallback)
+    \end{itemize}
+    \item \textbf{Database Layer}: Integrates separate collections in MongoDB Atlas, including User Database, Startup Database, and Feedback/Result Databases.
+\end{enumerate}
+
+% ==============================================================================
+% CHAPTER 4: ENTITY-RELATIONSHIP (ER) DIAGRAM
+% ==============================================================================
+\chapter{ER DIAGRAM \& DATABASE SCHEMA}
+
+\section{ER Model Configuration}
+The database ER structure maps key entities, their attributes, and relationships:
+
+\subsection{Entities & Attributes}
+\begin{itemize}
+    \item \textbf{User}: Credentials, profile data, and notification preferences. Attributes: `User\_ID` (PK), `email` (Unique), `password`, `role` (founder/candidate/investor/admin), `skills`, `interests`, `isOnboarded`, `notificationPreferences` (email/inApp).
+    \item \textbf{Startup}: Attributes: `Startup\_ID` (PK), `title`, `description`, `owner` (FK to User), `category` (FK to Category), `upvotes` (Array of User FKs), `waitlist` (Array of User FKs), `isVerified`, `flagCount`.
+    \item \textbf{Application}: Collaboration applications. Attributes: `Application\_ID` (PK), `startup` (FK to Startup), `candidate` (FK to User), `status` (pending/accepted/declined), `message`.
+    \item \textbf{AIReport}: Attributes: `Report\_ID` (PK), `startup` (FK to Startup), `swot` (Object), `businessModelCanvas` (Object), `validationIndex`.
+    \item \textbf{Category}: Sectors. Attributes: `Category\_ID` (PK), `Category\_Name`, `description`.
+    \item \textbf{Connection}: Chat connections. Attributes: `Connection\_ID` (PK), `sender` (FK), `recipient` (FK), `status`.
+    \item \textbf{Message}: Chat logs. Attributes: `Message\_ID` (PK), `connection` (FK), `sender` (FK), `text`, `createdAt`.
+    \item \textbf{AuditLog}: Attributes: `Log\_ID` (PK), `user` (FK), `action`, `ipAddress`, `userAgent`, `timestamp`.
+\end{itemize}
+
+\subsection{Key Relationships}
+\begin{itemize}
+    \item \textbf{User $\rightarrow$ Owns $\rightarrow$ Startup}: One user can own multiple startups (\textbf{1 : N relationship}).
+    \item \textbf{User $\rightarrow$ Appreciates $\rightarrow$ Startup (Upvotes)}: Many-to-many relationship of upvotes (\textbf{N : M relationship}).
+    \item \textbf{User $\rightarrow$ Joins $\rightarrow$ Startup (Waitlist)}: Many-to-many relationship of waitlist signups (\textbf{N : M relationship}).
+    \item \textbf{Startup $\rightarrow$ Generates $\rightarrow$ AIReport}: Each startup has exactly one AI validation report (\textbf{1 : 1 relationship}).
+    \item \textbf{User $\rightarrow$ Sends $\rightarrow$ Connection}: Mapped as a relationship between two user IDs.
+\end{itemize}
+
+% ==============================================================================
+% CHAPTER 5: KEY FEATURES
+% ==============================================================================
+\chapter{KEY FEATURES}
+\begin{itemize}
+    \item \textbf{Rotating AI validation}: Evaluates pitches using dynamic API key rotation arrays (Gemini API with Groq fallback under HTTP 429 rate-limit errors).
+    \item \textbf{Algorithmic Compatibility Matching}: Matches candidates with founder opportunities based on required skills overlap.
+    \item \textbf{Real-Time Websocket chat}: Synchronizes live messaging and unread count events using Socket.IO.
+    \item \textbf{Asynchronous Mail Triggers}: Dispatches verification and welcome mailers via the Resend API.
+    \item \textbf{Announcements Broadcaster}: Administrative panel inside `AdminDashboard.jsx` allowing admins to broadcast alerts to specific audiences.
+    \item \textbf{Security Auditing Trails}: Tracks sensitive admin actions, capturing operating IP addresses and User-Agent headers.
+\end{itemize}
+
+% ==============================================================================
+% CHAPTER 6: ROLES AND RESPONSIBILITIES
+% ==============================================================================
+\chapter{ROLES AND RESPONSIBILITIES}
+
+\section{1. Founder}
+These users post and validate startup ideas. Responsibilities include:
+\begin{itemize}
+    \item Register and manage account profiles.
+    \item Submit and update startup listings.
+    \item Request and review AI validation insights.
+    \item Review candidate application requests and manage team invites.
+\end{itemize}
+
+\section{2. Co-Founder Candidate}
+These users offer skills to startup teams. Responsibilities include:
+\begin{itemize}
+    \item Register skills (e.g. Node, React) and category interests.
+    \item Browse matching startups based on compatibility scores.
+    \item Apply to join waitlists or team vacancies.
+\end{itemize}
+
+\section{3. Investor}
+These users explore traction data. Responsibilities include:
+\begin{itemize}
+    \item Browse verified startup ideas sorted by votes and waitlist indices.
+    \item Bookmark high-signal listings.
+    \item Review founder metrics and growth analytics charts.
+\end{itemize}
+
+\section{4. Admin}
+Admin manages overall system integrity. Responsibilities include:
+\begin{itemize}
+    \item Review flagged contents and resolve abuse reports.
+    \item Manage categories and award verified badges.
+    \item Broadcast system announcements and view audit security trails.
+\end{itemize}
+
+% ==============================================================================
+% CHAPTER 7: USER FLOW
+% ==============================================================================
+\chapter{USER FLOWS}
+\section{Founder Flow}
+\begin{enumerate}
+    \item Register / Log In $\rightarrow$ Onboard Profile
+    \item Submit Startup Listing
+    \item Generate AI Validation Canvas (SWOT/BM Canvas)
+    \item Review matched candidates and review applications
+    \item Establish Socket chat connection
+\end{enumerate}
+
+\section{Admin Flow}
+\begin{enumerate}
+    \item Log In $\rightarrow$ Open Admin Dashboard
+    \item Moderate reported items in flags queue
+    \item Review security audit logs
+    \item Dispatch platform-wide announcements via Broadcaster
+\end{enumerate}
+
+% ==============================================================================
+% CHAPTER 8: MVC ARCHITECTURE
+% ==============================================================================
+\chapter{MVC ARCHITECTURE}
+The StartupHub AI follows the Model–View–Controller (MVC) architecture, separating backend services, controllers, data routers, and database collections from frontend Vite elements.
+
+\section{Model Layer}
+Implemented using MongoDB with Mongoose schemas. Collections include User, Startup, Application, AIReport, Connection, Message, Category, and AuditLog.
+
+\section{View Layer}
+Built using React.js and styled with Tailwind CSS. Incorporates Axios APIs and Socket listeners.
+
+\section{Controller Layer}
+Node.js and Express.js controllers process requests, execute logic, query models, and return responses.
+
+% ==============================================================================
+% CHAPTER 9: PROJECT SETUP
+% ==============================================================================
+\chapter{PROJECT SETUP}
+\section{Folder Scaffolding}
+Create a main root project folder: `StartUp_HUB`. Inside that folder, initialize two main sub-directories:
+\begin{itemize}
+    \item `client/`
+    \item `server/`
+\end{itemize}
+
+\section{Client Setup}
+Open the `client` folder in the terminal and execute:
+\begin{lstlisting}[language=bash]
+npm create vite@latest . -- --template react
+# Select React framework and JavaScript variant
+npm install axios socket.io-client recharts lucide-react tailwindcss
+npm run dev
+\end{lstlisting}
+
+\section{Server Setup}
+Open the `server` folder in the terminal and execute:
+\begin{lstlisting}[language=bash]
+npm init -y
+npm install express mongoose jsonwebtoken bcryptjs socket.io resend dotenv node-cron
+mkdir src/models src/controllers src/routes src/middleware src/config src/services
+\end{lstlisting}
+
+% ==============================================================================
+% CHAPTER 10: BACKEND STRUCTURE & SCRIPTS
+% ==============================================================================
+\chapter{BACKEND STRUCTURE \& IMPLEMENTATION}
+
+\section{Mongoose Schemas}
+
+\begin{lstlisting}[language=JavaScript, caption=User Schema (User.js)]
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const userSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true, index: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['founder', 'candidate', 'investor', 'admin'], default: 'founder' },
+  skills: [{ type: String, index: true }],
+  interests: [{ type: String }],
+  isOnboarded: { type: Boolean, default: false },
+  notificationPreferences: {
+    email: { type: Boolean, default: true },
+    inApp: { type: Boolean, default: true }
+  }
+}, { timestamps: true });
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+module.exports = mongoose.model('User', userSchema);
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Startup Schema (Startup.js)]
+const mongoose = require('mongoose');
+
+const startupSchema = new mongoose.Schema({
+  title: { type: String, required: true, trim: true },
+  description: { type: String, required: true },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  waitlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  isVerified: { type: Boolean, default: false },
+  flagCount: { type: Number, default: 0 }
+}, { timestamps: true });
+
+module.exports = mongoose.model('Startup', startupSchema);
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Application Schema (Application.js)]
+const mongoose = require('mongoose');
+
+const applicationSchema = new mongoose.Schema({
+  startup: { type: mongoose.Schema.Types.ObjectId, ref: 'Startup', required: true },
+  candidate: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  status: { type: String, enum: ['pending', 'accepted', 'declined'], default: 'pending' },
+  message: { type: String }
+}, { timestamps: true });
+
+module.exports = mongoose.model('Application', applicationSchema);
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=AIReport Schema (AIReport.js)]
+const mongoose = require('mongoose');
+
+const aiReportSchema = new mongoose.Schema({
+  startup: { type: mongoose.Schema.Types.ObjectId, ref: 'Startup', required: true, unique: true },
+  swot: {
+    strengths: [String],
+    weaknesses: [String],
+    opportunities: [String],
+    threats: [String]
+  },
+  businessModelCanvas: {
+    valueProposition: String,
+    costStructure: String,
+    revenueStreams: String,
+    targetMarket: String
+  },
+  validationIndex: { type: Number, required: true }
+}, { timestamps: true });
+
+module.exports = mongoose.model('AIReport', aiReportSchema);
+\end{lstlisting}
+
+% ==============================================================================
+% CHAPTER 11: FRONTEND STRUCTURE
+% ==============================================================================
+\chapter{FRONTEND STRUCTURE \& FLOW}
+The client features a decoupled design layout:
+\begin{itemize}
+    \item `client/src/components/Navbar.jsx`: Configures contextual links depending on user authentication status.
+    \item `client/src/pages/Onboarding.jsx`: Captures user skills and preference arrays, triggering profile updates.
+    \item `client/src/pages/Dashboard.jsx`: Renders the founder's charts and application queues.
+    \item `client/src/pages/Chat.jsx`: Manages the real-time chat interface.
+    \item `client/src/pages/AdminDashboard.jsx`: Displays administrative lists, moderation queues, and the Announcements Broadcaster form.
+\end{itemize}
+
+% ==============================================================================
+% CHAPTER 12: OUTPUT SCREENSHOTS WALKTHROUGH
+% ==============================================================================
+\chapter{USER INTERFACE LAYOUT \& VERIFICATION}
+
+\section{Verification Screenshots Mappings}
+The platform interfaces are verified against our core design requirements:
+\begin{itemize}
+    \item \textbf{Figure 1: Home Feed}: Renders the feed with search fields, domain categories, and startup listings.
+    \item \textbf{Figure 2: Profile Onboarding}: Collects skills and interest selections.
+    \item \textbf{Figure 3: Submit Startup}: Input fields for concept titles, categories, and taglines.
+    \item \textbf{Figure 4: AI Insights Panel}: Visual SWOT grids, roadmaps, and validation index gauges.
+    \item \textbf{Figure 5: Real-Time Chat}: Standard chat view displaying current conversation logs.
+    \item \textbf{Figure 6: Admin Dashboard}: Moderation queues, logs, and the Announcements Broadcaster tab.
+\end{itemize}
+
+% ==============================================================================
+% CHAPTER 13: REFERENCES
+% ==============================================================================
+\chapter*{REFERENCES}
+\addcontentsline{toc}{chapter}{References}
+\begin{enumerate}
+    \item MongoDB Documentation --- \url{https://www.mongodb.com/docs/}
+    \item Express.js Official Documentation --- \url{https://expressjs.com/}
+    \item React.js Official Documentation --- \url{https://react.dev/}
+    \item Node.js Official Documentation --- \url{https://nodejs.org/en/docs/}
+    \item JSON Web Tokens Introduction --- \url{https://jwt.io/introduction/}
+    \item Tailwind CSS Documentation --- \url{https://tailwindcss.com/docs}
+    \item Recharts API Reference --- \url{https://recharts.org/en-US/api}
+    \item Mongoose ODM Documentation --- \url{https://mongoosejs.com/docs/}
+    \item Axios HTTP Client Documentation --- \url{https://axios-http.com/docs/intro}
+    \item React Router v7 Documentation --- \url{https://reactrouter.com/}
+    \item Lucide React Icons --- \url{https://lucide.dev/}
+    \item Bcrypt.js NPM Package --- \url{https://www.npmjs.com/package/bcryptjs}
+    \item Vite Build Tool --- \url{https://vitejs.dev/}
+    \item MongoDB Atlas Cloud Database --- \url{https://www.mongodb.com/atlas}
+    \item Postman API Testing Tool --- \url{https://www.postman.com/}
+\end{enumerate}
+
+\end{document}

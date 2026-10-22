@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Rocket, User, LayoutDashboard, LogOut, Compass, Users, MessageSquare, Shield, Bell } from 'lucide-react';
+import { Rocket, User, LayoutDashboard, LogOut, Compass, Users, MessageSquare, Shield, Bell, FileText, Landmark, Briefcase } from 'lucide-react';
+
+
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import API from '../services/api';
 import { logoutSuccess } from '../features/authSlice';
@@ -104,6 +107,11 @@ const Navbar = () => {
             <Compass className="h-4 w-4" />
             Explore
           </Link>
+          <Link to="/jobs" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors text-sm font-medium">
+            <Briefcase className="h-4 w-4" />
+            Opportunities
+          </Link>
+
 
           {isAuthenticated ? (
             <>
@@ -146,6 +154,17 @@ const Navbar = () => {
                 <Users className="h-4 w-4" />
                 Matches
               </Link>
+              <Link to="/resume-analyzer" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors text-sm font-medium">
+                <FileText className="h-4 w-4 text-brand-cyan" />
+                Resume Analyzer
+              </Link>
+              {(user?.role === 'founder' || user?.role === 'admin') && (
+                <Link to="/fundraising-dashboard" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors text-sm font-medium">
+                  <Landmark className="h-4 w-4 text-emerald-400" />
+                  Fundraising
+                </Link>
+              )}
+
               <Link to="/chat" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors text-sm font-medium">
                 <MessageSquare className="h-4 w-4" />
                 Chat

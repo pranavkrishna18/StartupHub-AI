@@ -165,6 +165,17 @@ exports.sendNotification = async ({
               );
               break;
 
+            case 'application_stage_update':
+              await emailService.sendApplicationStageUpdateEmail(
+                receiverEmail,
+                receiverName,
+                startupName,
+                extraContext.roleProposed || 'Team Member',
+                extraContext.stage || 'Update'
+              );
+              break;
+
+
             default:
               console.log(`No matching template logic for notification type: ${type}`);
           }

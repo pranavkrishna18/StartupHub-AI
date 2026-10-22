@@ -45,8 +45,35 @@ const profileSchema = new mongoose.Schema({
     github: { type: String, default: '' },
     twitter: { type: String, default: '' },
     website: { type: String, default: '' }
+  },
+  resumeAnalysis: {
+    resumeText: String,
+    resumeFile: String,
+    extractedSkills: [String],
+
+    extractedExperience: [String],
+    extractedEducation: [String],
+    extractedProjects: [String],
+    extractedCertifications: [String],
+    extractedInterests: [String],
+    resumeScore: { type: Number, min: 0, max: 100 },
+    atsScore: { type: Number, min: 0, max: 100 },
+    compatibility: { type: Number, min: 0, max: 100 },
+    missingSkills: [String],
+    learningRoadmap: [String],
+    recommendedStartups: [
+      {
+        startupId: { type: mongoose.Schema.Types.ObjectId, ref: 'Startup' },
+        name: String,
+        matchReason: String
+      }
+    ],
+    recommendedRoles: [String],
+    personalizedSuggestions: [String],
+    analyzedAt: { type: Date }
   }
 }, {
+
   timestamps: true
 });
 
